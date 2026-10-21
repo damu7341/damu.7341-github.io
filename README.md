@@ -8,7 +8,7 @@ I BUILT MY OWN WEB OS FOR MY PERSONAL SITE
 
 ## Visit My OS
 
-[Turbo OS](https://damu7341-github.io/Turbo_OS/)
+[Turbo OS]https://damu7341-github.io/Turbo_OS/
 
 ## Built With
 * **HTML 5**

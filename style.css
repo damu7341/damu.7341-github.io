@@ -1,7 +1,9 @@
 body {
-  background-image: url('https://www.nasa.gov/sites/default/files/thumbnails/image/nasa-logo-web-rgb.png); /* Use your NASA image */
+  background-image: url('https://www.nasa.gov/sites/default/files/thumbnails/image/nasa-logo-web-rgb.png');
   background-size: cover;
   background-position: center;
+}
+
   color: white;
   font-family: monospace;
   margin: 0;

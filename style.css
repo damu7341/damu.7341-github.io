@@ -1,5 +1,5 @@
 body {
-  background-image: url('nasa_wallpaper.jpg'); /* Use your NASA image */
+  background-image: url('https://www.nasa.gov/sites/default/files/thumbnails/image/nasa-logo-web-rgb.png); /* Use your NASA image */
   background-size: cover;
   background-position: center;
   color: white;

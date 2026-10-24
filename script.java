@@ -1,349 +1,265 @@
-/* =================================
-   HYDRO OS — SPACE DESKTOP THEME
-   ================================= */
+/* =====================================
+   HYDRO OS — JAVASCRIPT SYSTEM
+   ===================================== */
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+// Helper function
+const $ = id => document.getElementById(id);
 
-body {
-    height: 100vh;
-    overflow: hidden;
-    color: #ffffff;
-    font-family: Arial, Helvetica, sans-serif;
 
-    /* Space wallpaper */
-    background:
-        radial-gradient(
-            circle at 75% 65%,
-            #244fa0 0%,
-            transparent 35%
-        ),
-        radial-gradient(
-            circle at 25% 20%,
-            #492478 0%,
-            transparent 40%
-        ),
-        linear-gradient(
-            145deg,
-            #030611,
-            #101b40,
-            #030611
-        );
-}
+// 1. LIVE CLOCK AND DATE
 
-/* Space stars */
+function updateTime() {
+    const now = new Date();
 
-.stars {
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    background-image:
-        radial-gradient(white 1px, transparent 1px);
-    background-size: 47px 53px;
-    opacity: 0.35;
-}
+    const time = now.toLocaleTimeString([], {
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit"
+    });
 
-/* Planet */
+    const date = now.toLocaleDateString([], {
+        weekday: "short",
+        month: "short",
+        day: "numeric"
+    });
 
-.planet {
-    position: fixed;
-    width: 240px;
-    height: 240px;
-    top: 20%;
-    right: 13%;
-    border-radius: 50%;
+    // Taskbar clock
+    const taskbarClock = $("clock");
 
-    background: linear-gradient(
-        130deg,
-        #9bbaff,
-        #4933a0 55%,
-        #101a48
-    );
-
-    box-shadow:
-        0 0 70px #526dff77,
-        inset -30px -20px 55px #05091d;
-}
-
-/* Desktop */
-
-.desktop {
-    position: relative;
-    height: calc(100vh - 60px);
-    padding: 20px;
-}
-
-.brand {
-    font-size: 30px;
-    font-weight: 800;
-    letter-spacing: 3px;
-}
-
-.sub {
-    margin-top: 6px;
-    color: #a6b9ef;
-    font-size: 12px;
-}
-
-/* Desktop application icons */
-
-.icons {
-    display: flex;
-    flex-direction: column;
-    gap: 22px;
-    margin-top: 35px;
-    width: 85px;
-}
-
-.appicon {
-    text-align: center;
-    font-size: 12px;
-    cursor: pointer;
-}
-
-.appicon span {
-    display: grid;
-    place-items: center;
-    width: 54px;
-    height: 54px;
-    margin: 0 auto 7px;
-
-    border: 1px solid #ffffff28;
-    border-radius: 16px;
-    background: #ffffff13;
-    backdrop-filter: blur(12px);
-
-    font-size: 25px;
-    transition: 0.2s;
-}
-
-.appicon:hover span {
-    background: #4d7bff55;
-    transform: translateY(-3px);
-}
-
-/* Application windows */
-
-.window {
-    position: absolute;
-    top: 12%;
-    left: 23%;
-
-    width: min(540px, 72vw);
-    height: min(430px, 65vh);
-
-    display: none;
-    overflow: hidden;
-
-    border: 1px solid #ffffff35;
-    border-radius: 15px;
-
-    background: #10162bed;
-    backdrop-filter: blur(20px);
-
-    box-shadow: 0 25px 90px #0009;
-}
-
-.winhead {
-    height: 48px;
-    padding: 0 15px;
-
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    background: #ffffff0b;
-    border-bottom: 1px solid #ffffff18;
-}
-
-.content {
-    height: calc(100% - 48px);
-    padding: 18px;
-    overflow: auto;
-}
-
-/* Close button */
-
-.close {
-    width: 13px;
-    height: 13px;
-    border: none;
-    border-radius: 50%;
-    background: #e45d70;
-    cursor: pointer;
-}
-
-/* Hydro taskbar */
-
-#taskbar {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-
-    height: 60px;
-    padding: 0 15px;
-
-    display: flex;
-    align-items: center;
-    gap: 12px;
-
-    background: #080d1cdd;
-    border-top: 1px solid #ffffff25;
-    backdrop-filter: blur(20px);
-}
-
-/* Hydro menu button */
-
-#menuBtn {
-    padding: 10px 15px;
-    border: none;
-    border-radius: 10px;
-
-    background: #3154b9;
-    color: white;
-
-    font-weight: bold;
-    cursor: pointer;
-    transition: 0.2s;
-}
-
-#menuBtn:hover {
-    background: #527aff;
-}
-
-/* Taskbar application buttons */
-
-.taskapp {
-    padding: 10px;
-    border: none;
-    border-radius: 9px;
-
-    background: #ffffff12;
-    color: white;
-    cursor: pointer;
-}
-
-.taskapp:hover {
-    background: #ffffff24;
-}
-
-/* Clock and date */
-
-#clock {
-    margin-left: auto;
-    text-align: right;
-    font-size: 13px;
-    line-height: 1.5;
-}
-
-/* Start menu */
-
-#menu {
-    position: fixed;
-    bottom: 70px;
-    left: 12px;
-
-    width: 250px;
-    padding: 15px;
-
-    display: none;
-
-    background: #10182cf5;
-    border: 1px solid #ffffff2a;
-    border-radius: 16px;
-
-    box-shadow: 0 15px 50px #0009;
-    backdrop-filter: blur(20px);
-}
-
-.menuitem {
-    padding: 12px;
-    border-radius: 8px;
-    cursor: pointer;
-}
-
-.menuitem:hover {
-    background: #ffffff24;
-}
-
-/* Calendar */
-
-.calgrid {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    gap: 5px;
-}
-
-.day {
-    padding: 9px 2px;
-    text-align: center;
-    background: #ffffff0b;
-    border-radius: 6px;
-}
-
-.day.today {
-    background: #4269df;
-}
-
-.muted {
-    color: #aab9d9;
-}
-
-/* Terminal */
-
-.terminal {
-    color: #8fffc0;
-    font-family: monospace;
-    font-size: 14px;
-}
-
-#cmd {
-    width: 80%;
-    color: white;
-    background: transparent;
-    border: none;
-    outline: none;
-    font-family: monospace;
-}
-
-#output {
-    white-space: pre-wrap;
-    line-height: 1.7;
-}
-
-/* Headings */
-
-h2 {
-    margin-top: 0;
-}
-
-/* Smaller screens */
-
-@media (max-width: 600px) {
-    .planet {
-        width: 150px;
-        height: 150px;
-        right: 8%;
-        top: 25%;
+    if (taskbarClock) {
+        taskbarClock.innerHTML = `${time}<br>${date}`;
     }
 
-    .window {
-        top: 8%;
-        left: 5%;
-        width: 90%;
-        height: 75vh;
-    }
+    // Clock application
+    const bigClock = $("bigClock");
+    const bigDate = $("bigDate");
 
-    #taskbar {
-        gap: 7px;
-        padding: 0 8px;
-    }
+    if (bigClock) bigClock.textContent = time;
 
-    .brand {
-        font-size: 25px;
+    if (bigDate) {
+        bigDate.textContent = now.toLocaleDateString([], {
+            weekday: "long",
+            year: "numeric",
+            month: "long",
+            day: "numeric"
+        });
     }
 }
+
+updateTime();
+setInterval(updateTime, 1000);
+
+
+// 2. APPLICATION WINDOW SYSTEM
+
+function closeApps() {
+    document.querySelectorAll(".window").forEach(window => {
+        window.style.display = "none";
+    });
+}
+
+function openApp(id) {
+    const app = $(id);
+
+    if (!app) {
+        console.warn("Application not found:", id);
+        return;
+    }
+
+    closeApps();
+
+    app.style.display = "block";
+
+    const menu = $("menu");
+    if (menu) menu.style.display = "none";
+
+    // Focus terminal input when opened
+    if (id === "terminal") {
+        setTimeout(() => $("cmd")?.focus(), 50);
+    }
+}
+
+
+// 3. HYDRO START MENU
+
+function toggleMenu() {
+    const menu = $("menu");
+
+    if (!menu) return;
+
+    menu.style.display =
+        menu.style.display === "block"
+            ? "none"
+            : "block";
+}
+
+
+// 4. CALENDAR APPLICATION
+
+function drawCalendar() {
+    const monthTitle = $("month");
+    const grid = $("calgrid");
+
+    if (!monthTitle || !grid) return;
+
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = now.getMonth();
+
+    monthTitle.textContent = now.toLocaleDateString([], {
+        month: "long",
+        year: "numeric"
+    });
+
+    grid.replaceChildren();
+
+    // Weekday headings
+    ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
+        .forEach(day => {
+            const cell = document.createElement("div");
+            cell.className = "day muted";
+            cell.textContent = day;
+            grid.appendChild(cell);
+        });
+
+    const firstDay = new Date(year, month, 1).getDay();
+    const totalDays = new Date(year, month + 1, 0).getDate();
+
+    // Empty spaces before the first day
+    for (let i = 0; i < firstDay; i++) {
+        grid.appendChild(document.createElement("div"));
+    }
+
+    // Calendar dates
+    for (let day = 1; day <= totalDays; day++) {
+        const cell = document.createElement("div");
+
+        cell.className = "day";
+        cell.textContent = day;
+        cell.style.cursor = "pointer";
+
+        if (day === now.getDate()) {
+            cell.classList.add("today");
+        }
+
+        cell.addEventListener("click", () => {
+            const selected = $("selectedDate");
+
+            if (selected) {
+                selected.textContent =
+                    new Date(year, month, day).toLocaleDateString([], {
+                        weekday: "long",
+                        year: "numeric",
+                        month: "long",
+                        day: "numeric"
+                    });
+            }
+        });
+
+        grid.appendChild(cell);
+    }
+}
+
+drawCalendar();
+
+
+// 5. BASIC HYDRO TERMINAL
+
+const output = $("output");
+const commandInput = $("cmd");
+
+function runCommand(command) {
+    const parts = command.trim().split(/\s+/);
+    const name = (parts[0] || "").toLowerCase();
+    const argument = command.trim().slice(name.length).trim();
+
+    switch (name) {
+        case "help":
+            return [
+                "HYDRO OS TERMINAL COMMANDS",
+                "help   - Show available commands",
+                "date   - Show current date",
+                "time   - Show current time",
+                "clear  - Clear terminal",
+                "about  - About Hydro OS",
+                "apps   - List applications",
+                "echo   - Print a message"
+            ].join("\n");
+
+        case "date":
+            return new Date().toDateString();
+
+        case "time":
+            return new Date().toLocaleTimeString();
+
+        case "about":
+            return "Hydro OS 1.0 — Space Desktop Prototype";
+
+        case "apps":
+            return "Clock | Calendar | Terminal | About OS";
+
+        case "echo":
+            return argument;
+
+        case "clear":
+            if (output) output.textContent = "";
+            return null;
+
+        case "":
+            return null;
+
+        default:
+            return `Command not found: ${name}\nType help to see commands.`;
+    }
+}
+
+if (commandInput && output) {
+    commandInput.addEventListener("keydown", event => {
+        if (event.key !== "Enter") return;
+
+        const command = commandInput.value.trim();
+        commandInput.value = "";
+
+        if (!command) return;
+
+        const result = runCommand(command);
+
+        if (result !== null) {
+            output.textContent +=
+                `\n\nhydro@space:~ $ ${command}\n${result}`;
+        }
+
+        // Scroll to the latest output
+        output.parentElement.scrollTop =
+            output.parentElement.scrollHeight;
+    });
+}
+
+
+// 6. KEYBOARD SHORTCUTS
+
+document.addEventListener("keydown", event => {
+    // Escape closes applications and menu
+    if (event.key === "Escape") {
+        closeApps();
+
+        const menu = $("menu");
+        if (menu) menu.style.display = "none";
+    }
+
+    // Ctrl + Alt + T opens Terminal
+    if (
+        event.ctrlKey &&
+        event.altKey &&
+        event.key.toLowerCase() === "t"
+    ) {
+        event.preventDefault();
+        openApp("terminal");
+    }
+});
+
+
+// 7. HYDRO OS INITIALIZATION
+
+console.log("Hydro OS initialized successfully.");
+console.log("Welcome to your digital universe!");

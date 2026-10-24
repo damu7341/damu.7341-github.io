@@ -7,7 +7,7 @@ I BUILT MY OWN WEB OS FOR MY PERSONAL SITE
 
 ## Visit My OS
 
-[hydro os]https://damu7341-github.io/hydro_OS/
+[hydro os]**https://damu7341-github.io/hydro_OS/**
 
 ## Built With
 * **HTML 5**
